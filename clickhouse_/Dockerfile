@@ -3,29 +3,23 @@ FROM ubuntu:20.04
 ARG CLICKHOUSE_VERSION=22.2.2.1
 ARG CLICKHOUSE_GOSU_VERSION=1.14
 
-ARG REPO_CHANNEL="stable"
-ARG REPOSITORY="deb https://packages.clickhouse.com/deb ${REPO_CHANNEL} main"
-
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
         apt-transport-https \
-        ca-certificates \
         dirmngr \
         gnupg \
-        gnupg2 \
-        locales \
-        tzdata \
-        wget \
     && mkdir -p /etc/apt/sources.list.d \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv 8919F6BD2B48D754 \
-    && echo ${REPOSITORY} > /etc/apt/sources.list.d/clickhouse.list \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4 \
+    && echo "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/" > /etc/apt/sources.list.d/clickhouse.list \
     && apt-get update \
-    && apt-get --yes -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade \
     && env DEBIAN_FRONTEND=noninteractive \
         apt-get install --allow-unauthenticated --yes --no-install-recommends \
             clickhouse-common-static=$CLICKHOUSE_VERSION \
             clickhouse-client=$CLICKHOUSE_VERSION \
             clickhouse-server=$CLICKHOUSE_VERSION \
+            locales \
+            tzdata \
+            wget \
     && rm -rf \
         /var/lib/apt/lists/* \
         /var/cache/debconf \

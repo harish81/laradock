@@ -1,0 +1,13 @@
+vhost		 						 php				dir
+============================================================
+localhost 							=> default 	=> /var/www 
+<project>.def.localhost				=> default 	=> /var/www/<project>
+<project>.pub.localhost				=> default 	=> /var/www/<project>/public
+
+php80.localhost						=> php8.0	=> /var/www
+<project>.php80def.localhost		=> php8.0 	=> /var/www/<project>
+<project>.php80pub.localhost		=> php8.0 	=> /var/www/<project>/public
+
+php72.localhost						=> php7.2	=> /var/www
+<project>.php72def.localhost		=> php7.2 	=> /var/www/<project>
+<project>.php72pub.localhost		=> php7.2 	=> /var/www/<project>/public

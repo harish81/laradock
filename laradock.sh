@@ -1,0 +1,1 @@
+cd /home/harish/Workspace/web_root/laradock && docker-compose ${@}
